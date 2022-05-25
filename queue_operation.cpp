@@ -1,23 +1,20 @@
-class MyQueue {
-    
-    std::stack<int> m_normal;
-    std::stack<int> m_reversed;
-    
+#include<bits/stdc++.h>
+using namespace std;
+class MyQueue {   
+stack<int> m_normal;
+stack<int> m_reversed;
 public:
-    /** Initialize your data structure here. */
-    MyQueue() {
+        void push(int x) {
         
-    }
-    
-    /** Push element x to the back of queue. */
-    void push(int x) {
-        
-        m_normal.push(x);
-    }
-    
-    /** Removes the element from in front of queue and returns that element. */
-    int pop() {
-        
+            m_normal.push(x);
+        }
+        int pop() {
+        if( m_normal.empty() and m_reversed.empty())
+        {
+            cout<<"empty"<<endl;
+        }
+        else
+        {
         if(m_reversed.empty())
         {
             while(!m_normal.empty())
@@ -26,16 +23,13 @@ public:
                 m_normal.pop();
             }
         }
-        
+        }
         int top = m_reversed.top();
         m_reversed.pop();
             
         return top;
     }
-    
-    /** Get the front element. */
     int peek() {
-        
         if(m_reversed.empty())
         {
             while(!m_normal.empty())
@@ -44,13 +38,25 @@ public:
                 m_normal.pop();
             }
         }
-        
         return m_reversed.top();
     }
-    
-    /** Returns whether the queue is empty. */
     bool empty() {
         
         return m_normal.empty() and m_reversed.empty();
     }
 };
+int main()
+{
+    MyQueue ob = MyQueue();
+    ob.push(45);
+    ob.push(78);
+    ob.push(78);
+    ob.push(45);
+    ob.push(89);
+    ob.pop();
+    ob.pop();
+    ob.pop();
+    ob.pop();
+    cout<<ob.peek();
+    return 0;
+}
